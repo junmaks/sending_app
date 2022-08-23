@@ -17,12 +17,17 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 from rest_framework import routers
+from patches import routers
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions
+from users.urls import router_users
+from mailing_list.urls import router_mailing
 
 router = routers.DefaultRouter()
+router.extend(router_users)
+router.extend(router_mailing)
 
 schema_view = get_schema_view(
    openapi.Info(
